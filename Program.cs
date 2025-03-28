@@ -51,7 +51,13 @@ var client = new ChatClientBuilder(ollamaClient)
 
 const string ChatRoleDirective = """
                          You are a helpful assistant delivering XPR Network information 
-                         relating to cryptocurrency and blockchain.
+                         relating to cryptocurrency and blockchain. You have the ability
+                         to search the web for news and information, including details
+                         about XPR Network. Additionally, you can 
+                         interact with the XPR Network blockchain. You can retrieve token
+                         balances from accounts, transfer tokens between accounts, and buy
+                         or sell tokens. You can also retrieve information about which
+                         tokens are supported on XPR Network.
                          """;
 
 // 👇🏼 Get an MCP session scope used to get the MCP tools
@@ -66,7 +72,7 @@ while (prompt != "exit")
         new(ChatRole.User, prompt)
     ];
 
-    // 👇🏼 Pass the MCP tools to the chat client
+    // 👇🏼 Pass the messages and the MCP tools to the chat client
     var response =
         await client.GetResponseAsync(
             messages,
@@ -82,6 +88,6 @@ while (prompt != "exit")
 
 static string? readPrompt()
 {
-    Console.Write("\n\nAsk me about XPR accounts or to act on behalf of your XPR account. Type `exit` to exit > ");
+    Console.Write("Ask me about XPR accounts or to act on behalf of your XPR account. Type `exit` to exit > ");
     return Console.ReadLine();
 }
